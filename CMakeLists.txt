@@ -4,8 +4,8 @@ PROJECT(kick)
 OPTION(FORCE32 "Force a 32bit compile on 64bit" OFF)
 if (APPLE)
     SET(CMAKE_OSX_DEPLOYMENT_TARGET 10.11)
-    SET(CMAKE_C_FLAGS "-m32")
-    SET(CMAKE_CXX_FLAGS "-m32")
+    SET(CMAKE_C_FLAGS "-m64")
+    SET(CMAKE_CXX_FLAGS "-m64")
 elseif(FORCE32)
     SET(CMAKE_C_FLAGS "-m32")
     SET(CMAKE_CXX_FLAGS "-m32")
@@ -36,6 +36,7 @@ set(CMAKE_BUILD_WITH_INSTALL_RPATH TRUE)
 set(CMAKE_INSTALL_RPATH ${BIN_RPATH})
 set(CMAKE_INSTALL_RPATH_USE_LINK_PATH FALSE)
 
+
 SET(SOURCE
     kick.c
     binreloc.c
@@ -44,6 +45,8 @@ SET(SOURCE
 ADD_EXECUTABLE(kick
     ${SOURCE}
 )
+
+target_include_directories(kick PRIVATE /Users/matijak/build/mono)
 
 TARGET_LINK_LIBRARIES(kick
     ${CMAKE_SOURCE_DIR}/libmonosgen-2.0.a
